@@ -32,7 +32,24 @@ public class NumberPuzzle {
             return "4A0B";
         }
         
-        return "";
+        int aCnt = 0;
+        for (int i = 0; i < enter.length(); i++) {
+            if (expect.charAt(i) == enter.charAt(i)) {
+                aCnt++;
+            }
+        }
+        
+        int bCnt = 0;
+        for (int i = 0; i < expect.length(); i++) {
+            for (int j = 0; j < enter.length(); j++) {
+                if (expect.charAt(i) == enter.charAt(j)) {
+                    bCnt++;
+                }
+            }
+        }
+        bCnt -= aCnt;
+        
+        return String.format("%dA%dB", aCnt, bCnt);
     }
 
 }

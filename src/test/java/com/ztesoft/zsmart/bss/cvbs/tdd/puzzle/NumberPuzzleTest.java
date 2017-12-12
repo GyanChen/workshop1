@@ -53,7 +53,20 @@ public class NumberPuzzleTest {
     public void testGuessCorrct() {
         String result = numberPuzzle.validate(systemNumber, "1234");
         
-        Assert.assertEquals(result, "4A0B");
+        Assert.assertEquals("4A0B", result);
+    }
+    
+    /**
+     * Description: <br> 
+     *  
+     * @author chen.jian<br>
+     * @taskId <br> <br>
+     */ 
+    @Test
+    public void testGuessCorrct2() {
+        String result = numberPuzzle.validate(systemNumber, "4321");
+        
+        Assert.assertEquals("0A4B", result);
     }
     
     /**
@@ -64,7 +77,9 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessIncorrect() {
+        String result = numberPuzzle.validate(systemNumber, "9876");
         
+        Assert.assertEquals("0A0B", result);
     }
     
     /**
@@ -75,7 +90,22 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessPartCorrect() {
+        String result = numberPuzzle.validate(systemNumber, "3278");
         
+        Assert.assertEquals("1A1B", result);
+    }
+    
+    /**
+     * Description: <br> 
+     *  
+     * @author chen.jian<br>
+     * @taskId <br> <br>
+     */ 
+    @Test
+    public void testGuessPartCorrect2() {
+        String result = numberPuzzle.validate(systemNumber, "3415");
+        
+        Assert.assertEquals("0A3B", result);
     }
 
 }

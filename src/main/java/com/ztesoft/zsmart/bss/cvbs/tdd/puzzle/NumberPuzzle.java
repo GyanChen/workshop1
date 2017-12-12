@@ -17,5 +17,22 @@ package com.ztesoft.zsmart.bss.cvbs.tdd.puzzle;
  */
 
 public class NumberPuzzle {
+    
+    /**
+     * Description: <br> 
+     *  
+     * @author chen.jian<br>
+     * @taskId <br>
+     * @param expect <br>
+     * @param enter <br>
+     * @return <br>
+     */ 
+    public String validate(String expect, String enter) {
+        if (expect.equals(enter)) {
+            return "4A0B";
+        }
+        
+        return "";
+    }
 
 }

@@ -23,6 +23,11 @@ import org.junit.Test;
 public class NumberPuzzleTest {
     
     /**
+     * numberPuzzle <br>
+     */
+    private NumberPuzzle numberPuzzle = new NumberPuzzle();
+    
+    /**
      * systemNumber <br>
      */
     private String systemNumber;
@@ -46,7 +51,9 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessCorrct() {
-        Assert.assertEquals(systemNumber, "1234");
+        String result = numberPuzzle.validate(systemNumber, "1234");
+        
+        Assert.assertEquals(result, "4A0B");
     }
     
     /**

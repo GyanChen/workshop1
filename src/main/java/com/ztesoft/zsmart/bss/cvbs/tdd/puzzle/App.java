@@ -28,8 +28,17 @@ public class App {
         String enter = "";
         
         while ((enter = bufferReader.readLine()) != null) {
-            if (enter.equals("quit")) {
-                System.out.println("correct number is: " + systemNumber.getValue());
+            if (enter.equalsIgnoreCase("Y")) {
+                systemNumber = NumberFactory.getLength4PuzzleNumber();
+                continue;
+            }
+            
+            if (enter.equalsIgnoreCase("N")) {
+                break;
+            }
+            
+            if (enter.equalsIgnoreCase("quit")) {
+                System.out.println("Correct number is: " + systemNumber.getValue());
                 break;
             }
             
@@ -37,6 +46,12 @@ public class App {
             
             String result = NumberPuzzle.validate(systemNumber, enterNumber);
             System.out.println(result);
+            System.out.println();
+            
+            if (systemNumber.equals(enterNumber)) {
+                System.out.println("Congratulations! Continue?");
+                System.out.println();
+            }
         }
     }
 

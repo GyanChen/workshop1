@@ -5,6 +5,10 @@
  ****************************************************************************************/
 package com.ztesoft.zsmart.bss.cvbs.tdd.puzzle;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /** 
  * <Description> <br> 
  *  
@@ -18,9 +22,21 @@ package com.ztesoft.zsmart.bss.cvbs.tdd.puzzle;
 
 public class App {
     
-    public static void main(String[] args) {
-        while (true) {
+    public static void main(String[] args) throws IOException {
+        PuzzleNumberDto systemNumber = NumberFactory.getLength4PuzzleNumber();
+        BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
+        String enter = "";
+        
+        while ((enter = bufferReader.readLine()) != null) {
+            if (enter.equals("quit")) {
+                System.out.println("correct number is: " + systemNumber.getValue());
+                break;
+            }
             
+            PuzzleNumberDto enterNumber = new PuzzleNumberDto(enter);
+            
+            String result = NumberPuzzle.validate(systemNumber, enterNumber);
+            System.out.println(result);
         }
     }
 

@@ -108,7 +108,7 @@ public class PuzzleNumberDto {
     public void generateNoRepeatValue(int length) {
         StringBuilder sb = new StringBuilder("");
         
-        for (int i = 0; i < length; i++) {
+        while(sb.toString().length() < length) {
             String random = String.valueOf(generateRandom());
             if (sb.toString().contains(random)) {
                 continue;
@@ -130,6 +130,47 @@ public class PuzzleNumberDto {
     private int generateRandom() {
         Random random = new Random();
         return random.nextInt(9) + 1;
+    }
+
+    /**
+     * Description: <br> 
+     *  
+     * @author chen.jian<br>
+     * @taskId <br>
+     * @return <br>
+     */ 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((value == null) ? 0 : value.hashCode());
+        return result;
+    }
+
+    /**
+     * Description: <br> 
+     *  
+     * @author chen.jian<br>
+     * @taskId <br>
+     * @param obj
+     * @return <br>
+     */ 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PuzzleNumberDto other = (PuzzleNumberDto) obj;
+        if (value == null) {
+            if (other.value != null)
+                return false;
+        }
+        else if (!value.equals(other.value))
+            return false;
+        return true;
     }
 
 }

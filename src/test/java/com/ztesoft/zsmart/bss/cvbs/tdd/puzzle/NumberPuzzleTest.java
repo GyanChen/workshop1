@@ -23,11 +23,6 @@ import org.junit.Test;
 public class NumberPuzzleTest {
     
     /**
-     * numberPuzzle <br>
-     */
-    private NumberPuzzle numberPuzzle = new NumberPuzzle();
-    
-    /**
      * systemNumber <br>
      */
     private PuzzleNumberDto systemNumber;
@@ -51,7 +46,7 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessCorrct() {
-        String result = numberPuzzle.validate(systemNumber, new PuzzleNumberDto("1234"));
+        String result = NumberPuzzle.validate(systemNumber, new PuzzleNumberDto("1234"));
         
         Assert.assertEquals("4A0B", result);
     }
@@ -64,7 +59,7 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessCorrct2() {
-        String result = numberPuzzle.validate(systemNumber, new PuzzleNumberDto("4321"));
+        String result = NumberPuzzle.validate(systemNumber, new PuzzleNumberDto("4321"));
         
         Assert.assertEquals("0A4B", result);
     }
@@ -77,7 +72,7 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessIncorrect() {
-        String result = numberPuzzle.validate(systemNumber, new PuzzleNumberDto("9876"));
+        String result = NumberPuzzle.validate(systemNumber, new PuzzleNumberDto("9876"));
         
         Assert.assertEquals("0A0B", result);
     }
@@ -90,7 +85,7 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessPartCorrect() {
-        String result = numberPuzzle.validate(systemNumber, new PuzzleNumberDto("3278"));
+        String result = NumberPuzzle.validate(systemNumber, new PuzzleNumberDto("3278"));
         
         Assert.assertEquals("1A1B", result);
     }
@@ -103,7 +98,7 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessPartCorrect2() {
-        String result = numberPuzzle.validate(systemNumber, new PuzzleNumberDto("3415"));
+        String result = NumberPuzzle.validate(systemNumber, new PuzzleNumberDto("3415"));
         
         Assert.assertEquals("0A3B", result);
     }

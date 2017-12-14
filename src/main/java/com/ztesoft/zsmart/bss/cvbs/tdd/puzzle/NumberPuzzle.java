@@ -19,7 +19,7 @@ import com.ztesoft.zsmart.bss.cvbs.tdd.puzzle.component.BCntValidator;
  * @see com.ztesoft.zsmart.bss.cvbs.tdd.puzzle <br>
  */
 
-public class NumberPuzzle {
+public abstract class NumberPuzzle {
     
     /**
      * Description: <br> 
@@ -30,7 +30,7 @@ public class NumberPuzzle {
      * @param enter <br>
      * @return <br>
      */ 
-    public String validate(PuzzleNumberDto systemNumber, PuzzleNumberDto enterNumber) {
+    public static String validate(PuzzleNumberDto systemNumber, PuzzleNumberDto enterNumber) {
         int aCnt = 0;
         int bCnt = 0;
         

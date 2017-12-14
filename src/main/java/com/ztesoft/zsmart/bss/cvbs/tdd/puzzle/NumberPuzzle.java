@@ -5,6 +5,9 @@
  ****************************************************************************************/
 package com.ztesoft.zsmart.bss.cvbs.tdd.puzzle;
 
+import com.ztesoft.zsmart.bss.cvbs.tdd.puzzle.component.ACntValidator;
+import com.ztesoft.zsmart.bss.cvbs.tdd.puzzle.component.BCntValidator;
+
 /** 
  * <Description> <br> 
  *  
@@ -27,29 +30,23 @@ public class NumberPuzzle {
      * @param enter <br>
      * @return <br>
      */ 
-    public String validate(String expect, String enter) {
-        if (expect.equals(enter)) {
-            return "4A0B";
-        }
-        
+    public String validate(PuzzleNumberDto systemNumber, PuzzleNumberDto enterNumber) {
         int aCnt = 0;
-        for (int i = 0; i < enter.length(); i++) {
-            if (expect.charAt(i) == enter.charAt(i)) {
-                aCnt++;
-            }
-        }
-        
         int bCnt = 0;
-        for (int i = 0; i < expect.length(); i++) {
-            for (int j = 0; j < enter.length(); j++) {
-                if (expect.charAt(i) == enter.charAt(j)) {
-                    bCnt++;
-                }
-            }
-        }
-        bCnt -= aCnt;
         
-        return String.format("%dA%dB", aCnt, bCnt);
+        if (systemNumber.getValue().equals(enterNumber.getValue())) {
+            aCnt = systemNumber.getValue().length();
+            return String.format("%dA%dB", aCnt, bCnt);
+        }
+        
+        ACntValidator aCntValidator = new ACntValidator();
+        BCntValidator bCntValidator = new BCntValidator();
+        aCntValidator.setNumberValidator(bCntValidator);
+        aCntValidator.validate(systemNumber, enterNumber);
+        
+        aCnt = enterNumber.getaCnt();
+        bCnt = enterNumber.getbCnt();
+        return String.format("%dA%dB", aCnt, bCnt - aCnt);
     }
 
 }

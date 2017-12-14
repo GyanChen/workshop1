@@ -30,7 +30,7 @@ public class NumberPuzzleTest {
     /**
      * systemNumber <br>
      */
-    private String systemNumber;
+    private PuzzleNumberDto systemNumber;
     
     /**
      * Description: <br> 
@@ -40,7 +40,7 @@ public class NumberPuzzleTest {
      */ 
     @Before
     public void setUp() {
-        systemNumber = "1234";
+        systemNumber = new PuzzleNumberDto("1234");
     }
     
     /**
@@ -51,7 +51,7 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessCorrct() {
-        String result = numberPuzzle.validate(systemNumber, "1234");
+        String result = numberPuzzle.validate(systemNumber, new PuzzleNumberDto("1234"));
         
         Assert.assertEquals("4A0B", result);
     }
@@ -64,7 +64,7 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessCorrct2() {
-        String result = numberPuzzle.validate(systemNumber, "4321");
+        String result = numberPuzzle.validate(systemNumber, new PuzzleNumberDto("4321"));
         
         Assert.assertEquals("0A4B", result);
     }
@@ -77,7 +77,7 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessIncorrect() {
-        String result = numberPuzzle.validate(systemNumber, "9876");
+        String result = numberPuzzle.validate(systemNumber, new PuzzleNumberDto("9876"));
         
         Assert.assertEquals("0A0B", result);
     }
@@ -90,7 +90,7 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessPartCorrect() {
-        String result = numberPuzzle.validate(systemNumber, "3278");
+        String result = numberPuzzle.validate(systemNumber, new PuzzleNumberDto("3278"));
         
         Assert.assertEquals("1A1B", result);
     }
@@ -103,7 +103,7 @@ public class NumberPuzzleTest {
      */ 
     @Test
     public void testGuessPartCorrect2() {
-        String result = numberPuzzle.validate(systemNumber, "3415");
+        String result = numberPuzzle.validate(systemNumber, new PuzzleNumberDto("3415"));
         
         Assert.assertEquals("0A3B", result);
     }

@@ -20,7 +20,7 @@ import com.ztesoft.zsmart.bss.cvbs.tdd.puzzle.PuzzleNumberDto;
  * @see com.ztesoft.zsmart.bss.cvbs.tdd.puzzle.component <br>
  */
 
-public class ACntValidator extends AbsNumberValidator implements NumberValidate {
+public class BCntValidator extends AbsNumberValidator implements NumberValidate {
 
     /**
      * Description: <br> 
@@ -35,14 +35,16 @@ public class ACntValidator extends AbsNumberValidator implements NumberValidate 
         String expect = systemNumber.getValue();
         String enter = enterNumber.getValue();
         
-        int aCnt = 0;
-        for (int i = 0; i < enter.length(); i++) {
-            if (expect.charAt(i) == enter.charAt(i)) {
-                aCnt++;
+        int bCnt = 0;
+        for (int i = 0; i < expect.length(); i++) {
+            for (int j = 0; j < enter.length(); j++) {
+                if (expect.charAt(i) == enter.charAt(j)) {
+                    bCnt++;
+                }
             }
         }
         
-        enterNumber.setaCnt(aCnt);
+        enterNumber.setbCnt(bCnt);
         
         if (null != this.getNumberValidator()) {
             this.getNumberValidator().validate(systemNumber, enterNumber);

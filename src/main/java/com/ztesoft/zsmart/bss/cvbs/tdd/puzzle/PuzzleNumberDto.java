@@ -25,7 +25,13 @@ public class PuzzleNumberDto {
     private int aCnt;
     
     private int bCnt;
-
+    
+    public PuzzleNumberDto(String value) {
+        this.value = value;
+    }
+    
+    public PuzzleNumberDto() {}
+    
     /**
      * Description: <br>
      *  

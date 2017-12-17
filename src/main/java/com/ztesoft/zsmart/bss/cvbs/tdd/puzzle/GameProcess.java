@@ -5,6 +5,8 @@
  ****************************************************************************************/
 package com.ztesoft.zsmart.bss.cvbs.tdd.puzzle;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
 /** 
@@ -20,24 +22,44 @@ import java.io.PrintStream;
 
 public class GameProcess {
     
-    private PrintStream out = null;
+    private PrintStream out;
+    
+    private BufferedReader reader;
+    
+    private PuzzleNumberDto systemNumber;
 
     /** 
      * @param out <br>
      */ 
-    public GameProcess(PrintStream out) {
+    public GameProcess(PrintStream out, BufferedReader reader, PuzzleNumberDto systemNumber) {
         this.out = out;
+        this.reader = reader;
+        this.systemNumber = systemNumber;
     }
 
     /**
      * Description: <br> 
      *  
      * @author chen.jian<br>
+     * @throws IOException 
      * @taskId <br> <br>
      */ 
-    public void start() {
+    public void start() throws IOException {
         out.println("Welcome!");
         out.println("Please input your number(6): ");
+        
+        systemNumber.generateNoRepeatValue(4);
+        
+        String enter = reader.readLine();
+        PuzzleNumberDto enterNumber = new PuzzleNumberDto(enter);
+        
+        String result = NumberPuzzle.validate(systemNumber, enterNumber);
+        
+        out.println(result);
+        
+        if (!"4A0B".equals(result)) {
+            out.println("Please input your number(5): ");
+        }
     }
 
 }

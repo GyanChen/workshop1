@@ -5,6 +5,8 @@
  ****************************************************************************************/
 package com.ztesoft.zsmart.bss.cvbs.tdd.puzzle;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import org.mockito.InOrder;
@@ -27,26 +29,47 @@ public class GameProcessTest {
     
     private PrintStream out;
     private GameProcess game;
+    private BufferedReader reader;
     
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         out = Mockito.mock(PrintStream.class);
-        game = new GameProcess(out);
+        
+        reader = Mockito.mock(BufferedReader.class);
+        
+        PuzzleNumberDto systemNumber = Mockito.spy(new PuzzleNumberDto());
+        
+        game = new GameProcess(out, reader, systemNumber);
+        
+        Mockito.doNothing().when(systemNumber).generateNoRepeatValue(Mockito.anyInt());
+        Mockito.when(systemNumber.getValue()).thenReturn("4321");
+        Mockito.when(reader.readLine()).thenReturn("1234");
     }
 
     @Test
-    public void should_print_welcome_when_game_start() {
+    public void should_print_welcome_when_game_start() throws IOException {
         Mockito.verify(out, Mockito.never()).println("Welcome!");
         game.start();
         Mockito.verify(out).println("Welcome!");
     }
     
     @Test
-    public void should_print_please_input_after_game_start() {
+    public void should_print_please_input_after_game_start() throws IOException {
         game.start();
         InOrder inOrder = Mockito.inOrder(out);
         inOrder.verify(out).println("Welcome!");
         inOrder.verify(out).println("Please input your number(6): ");
+    }
+    
+    @Test
+    public void should_reduce_one_chance_when_guess_wrong() throws IOException {
+        game.start();
+        
+        InOrder inOrder = Mockito.inOrder(out);        
+        inOrder.verify(out).println("Welcome!");
+        inOrder.verify(out).println("Please input your number(6): ");
+        inOrder.verify(out).println("0A4B");
+        inOrder.verify(out).println("Please input your number(5): ");
     }
 
 }

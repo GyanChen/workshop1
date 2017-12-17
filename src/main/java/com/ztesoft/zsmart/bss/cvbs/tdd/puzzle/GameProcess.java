@@ -46,20 +46,22 @@ public class GameProcess {
      */ 
     public void start() throws IOException {
         out.println("Welcome!");
-        out.println("Please input your number(6): ");
+        int round = 6;
         
         systemNumber.generateNoRepeatValue(4);
         
-        String enter = reader.readLine();
-        PuzzleNumberDto enterNumber = new PuzzleNumberDto(enter);
-        
-        String result = NumberPuzzle.validate(systemNumber, enterNumber);
-        
-        out.println(result);
-        
-        if (!"4A0B".equals(result)) {
-            out.println("Please input your number(5): ");
+        while (round > 0) {
+            out.println("Please input your number(" + round + "): ");
+            String enter = reader.readLine();
+            PuzzleNumberDto enterNumber = new PuzzleNumberDto(enter);
+            
+            String result = NumberPuzzle.validate(systemNumber, enterNumber);
+            
+            out.println(result);
+            round--;
         }
+        
+        out.println("Game over");
     }
 
 }

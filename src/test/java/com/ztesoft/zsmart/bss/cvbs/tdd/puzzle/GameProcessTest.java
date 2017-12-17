@@ -101,5 +101,18 @@ public class GameProcessTest {
         Mockito.verify(out, Mockito.never()).println("4A0B");
         inOrder.verify(out).println("Congratulation!");
     }
+    
+    @Test
+    public void should_congratulate_when_input_is_right_on_second_round() throws IOException {
+        Mockito.when(reader.readLine()).thenReturn("1234").thenReturn("4321");
+        game.start();
+        
+        inOrder.verify(out).println("Welcome!");
+        inOrder.verify(out).println("Please input your number(6): ");
+        inOrder.verify(out).println("0A4B");
+        inOrder.verify(out).println("Please input your number(5): ");
+        Mockito.verify(out, Mockito.never()).println("4A0B");
+        inOrder.verify(out).println("Congratulation!");
+    }
 
 }

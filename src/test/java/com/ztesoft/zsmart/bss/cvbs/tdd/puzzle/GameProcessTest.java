@@ -9,6 +9,7 @@ import java.io.PrintStream;
 
 import org.mockito.InOrder;
 import org.mockito.Mockito;
+import org.junit.Before;
 import org.junit.Test;
 
 /** 
@@ -24,11 +25,17 @@ import org.junit.Test;
 
 public class GameProcessTest {
     
+    private PrintStream out;
+    private GameProcess game;
+    
+    @Before
+    public void setUp() {
+        out = Mockito.mock(PrintStream.class);
+        game = new GameProcess(out);
+    }
+
     @Test
     public void should_print_welcome_when_game_start() {
-        PrintStream out = Mockito.mock(PrintStream.class);
-        GameProcess game = new GameProcess(out);
-        
         Mockito.verify(out, Mockito.never()).println("Welcome!");
         game.start();
         Mockito.verify(out).println("Welcome!");
@@ -36,9 +43,6 @@ public class GameProcessTest {
     
     @Test
     public void should_print_please_input_after_game_start() {
-        PrintStream out = Mockito.mock(PrintStream.class);
-        GameProcess game = new GameProcess(out);
-        
         game.start();
         InOrder inOrder = Mockito.inOrder(out);
         inOrder.verify(out).println("Welcome!");

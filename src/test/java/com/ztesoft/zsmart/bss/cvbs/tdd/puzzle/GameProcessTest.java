@@ -30,14 +30,15 @@ public class GameProcessTest {
     private PrintStream out;
     private GameProcess game;
     private BufferedReader reader;
+    private PuzzleNumberDto systemNumber;
+    private InOrder inOrder;
     
     @Before
     public void setUp() throws IOException {
         out = Mockito.mock(PrintStream.class);
-        
-        reader = Mockito.mock(BufferedReader.class);
-        
-        PuzzleNumberDto systemNumber = Mockito.spy(new PuzzleNumberDto());
+        inOrder = Mockito.inOrder(out);        
+        reader = Mockito.mock(BufferedReader.class);        
+        systemNumber = Mockito.spy(new PuzzleNumberDto());
         
         game = new GameProcess(out, reader, systemNumber);
         
@@ -56,7 +57,6 @@ public class GameProcessTest {
     @Test
     public void should_print_please_input_after_game_start() throws IOException {
         game.start();
-        InOrder inOrder = Mockito.inOrder(out);
         inOrder.verify(out).println("Welcome!");
         inOrder.verify(out).println("Please input your number(6): ");
     }
@@ -65,7 +65,6 @@ public class GameProcessTest {
     public void should_reduce_one_chance_when_guess_wrong() throws IOException {
         game.start();
         
-        InOrder inOrder = Mockito.inOrder(out);        
         inOrder.verify(out).println("Welcome!");
         inOrder.verify(out).println("Please input your number(6): ");
         inOrder.verify(out).println("0A4B");
@@ -76,7 +75,6 @@ public class GameProcessTest {
     public void should_reduce_chances_one_by_one_until_game_over() throws IOException {
         game.start();
         
-        InOrder inOrder = Mockito.inOrder(out);        
         inOrder.verify(out).println("Welcome!");
         inOrder.verify(out).println("Please input your number(6): ");
         inOrder.verify(out).println("0A4B");
@@ -91,6 +89,17 @@ public class GameProcessTest {
         inOrder.verify(out).println("Please input your number(1): ");
         inOrder.verify(out).println("0A4B");
         inOrder.verify(out).println("Game over");
+    }
+    
+    @Test
+    public void should_congratulate_when_input_is_right() throws IOException {
+        Mockito.when(systemNumber.getValue()).thenReturn("1234");
+        game.start();
+        
+        inOrder.verify(out).println("Welcome!");
+        inOrder.verify(out).println("Please input your number(6): ");
+        Mockito.verify(out, Mockito.never()).println("4A0B");
+        inOrder.verify(out).println("Congratulation!");
     }
 
 }

@@ -49,16 +49,25 @@ public class GameProcess {
         int round = 6;
         
         systemNumber.generateNoRepeatValue(4);
+        String result = "";
         
         while (round > 0) {
             out.println("Please input your number(" + round + "): ");
             String enter = reader.readLine();
             PuzzleNumberDto enterNumber = new PuzzleNumberDto(enter);
             
-            String result = NumberPuzzle.validate(systemNumber, enterNumber);
+            result = NumberPuzzle.validate(systemNumber, enterNumber);
+            if ("4A0B".equals(result)) {
+                break;
+            }
             
             out.println(result);
             round--;
+        }
+        
+        if ("4A0B".equals(result)) {
+            out.println("Congratulation!");
+            return;
         }
         
         out.println("Game over");

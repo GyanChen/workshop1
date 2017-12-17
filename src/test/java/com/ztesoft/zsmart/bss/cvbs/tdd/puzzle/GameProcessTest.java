@@ -7,6 +7,7 @@ package com.ztesoft.zsmart.bss.cvbs.tdd.puzzle;
 
 import java.io.PrintStream;
 
+import org.mockito.InOrder;
 import org.mockito.Mockito;
 import org.junit.Test;
 
@@ -31,6 +32,17 @@ public class GameProcessTest {
         Mockito.verify(out, Mockito.never()).println("Welcome!");
         game.start();
         Mockito.verify(out).println("Welcome!");
+    }
+    
+    @Test
+    public void should_print_please_input_after_game_start() {
+        PrintStream out = Mockito.mock(PrintStream.class);
+        GameProcess game = new GameProcess(out);
+        
+        game.start();
+        InOrder inOrder = Mockito.inOrder(out);
+        inOrder.verify(out).println("Welcome!");
+        inOrder.verify(out).println("Please input your number(6): ");
     }
 
 }
